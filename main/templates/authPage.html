@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static '/img/logo.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static '/css/authcss.css' %}">
+    <title>AuthPage</title>
+    <style>
+      .helptext {
+        display: none;
+       }
+    </style>
+</head>
+<body>
+<div class="cont">
+  <div class="form sign-in">
+    <h2>Welcome back,</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ lform }}
+      <button class="submit">Sign In</button>
+  </form>
+    <p class="forgot-pass">Forgot password?</p>
+    <a href="{% url 'index' %}">Вернуться на главную страницу</a>
+  </div>
+  <div class="sub-cont">
+    <div class="img">
+      <div class="img__text m--up">
+        <h2>New here?</h2>
+        <p>Sign up and discover great amount of new opportunities!</p>
+      </div>
+      <div class="img__text m--in">
+        <h2>One of us?</h2>
+        <p>If you already has an account, just sign in. We've missed you!</p>
+      </div>
+      <div class="img__btn">
+        <span class="m--up">Sign Up</span>
+        <span class="m--in">Sign In</span>
+      </div>
+    </div>
+    <div class="form sign-up">
+      <h2>Time to feel like home,</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ sform }}
+      <button class="submit">Sign Up</button>
+  </form>
+
+      <a href="{% url 'index' %}">Вернуться на главную страницу</a>
+    </div>
+  </div>
+</div>
+
+
+</body>
+<script src="{% static '/js/script.js' %}"></script>
+

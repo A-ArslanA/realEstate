@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+
+{% block links %}
+    <link rel="shortcut icon" href="{% static '/img/logo.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/add.css' %}">
+{% endblock %}
+
+
+{% block title %} Add {% endblock %}
+
+{% block linkActive %}
+    <a href="{% url 'rent' %}" class="links">Rent</a>
+    <a href="{% url 'buy' %}" class="links">Buy</a>
+    <a href="{% url 'sell' %}" class="links">Sell</a>
+    <a href="{% url 'favorite' %}" class="links">Favorite</a>
+{% endblock %}
+
+
+{% block content %}
+    <h1>Add Property</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.name }}
+        {{ form.description }}
+        {{ form.price }}
+        {{ form.address }}
+        {{ form.bedrooms }}
+        {{ form.bathrooms }}
+        {{ form.squareArea }}
+        {{ form.repairQuality }}
+        {{ form.photo }}
+        <span>Active</span>
+        {{ form.status }}
+        <span>isRent</span>
+        {{ form.isRent }}
+        <span>isBuy</span>
+        {{ form.isBuy }}
+        <span>Owner (can ignor)</span>
+        {{ form.owner }}
+        <span style="color: red">{{ error }}</span>
+
+
+        <button type="submit">Add</button>
+    </form>
+
+{% endblock %}

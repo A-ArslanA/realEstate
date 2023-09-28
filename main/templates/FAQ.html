@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block links %}
+    <link rel="shortcut icon" href="{% static '/img/logo.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+{% endblock %}
+
+{% block title %} FAQ {% endblock %}
+
+{% block linkActive %}
+    <a href="{% url 'rent' %}" class="links">Rent</a>
+    <a href="{% url 'buy' %}" class="links">Buy</a>
+    <a href="{% url 'sell' %}" class="links">Sell</a>
+    <a href="{% url 'favorite' %}" class="links">Favorite</a>
+{% endblock %}
+
+{% block content %}
+{% if user.is_superuser %}
+    <nav>
+        <h1>FAQ</h1>
+    </nav>
+    {% for el in faqs %}
+        <div class="faqWrapper">
+            <div class="faq">
+                <span class="mb20">{{ el.user }}</span>
+                <span>{{ el.email }}</span>
+                <span>{{ el.created_at }}</span>
+            </div>
+        </div>
+    {% endfor %}
+
+{% else %}
+    <nav>
+        <h1>U a not admin</h1>
+    </nav>
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

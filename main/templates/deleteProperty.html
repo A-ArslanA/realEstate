@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block links %}
+    <link rel="shortcut icon" href="{% static '/img/logo.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/css/productDetailcss.css' %}">
+{% endblock %}
+
+{% block title %} {{ property.name }} {% endblock %}
+
+{% block linkActive %}
+    <a href="{% url 'rent' %}" class="links">Rent</a>
+    <a href="{% url 'buy' %}" class="links">Buy</a>
+    <a href="{% url 'sell' %}" class="links">Sell</a>
+    <a href="{% url 'favorite' %}" class="links">Favorite</a>
+{% endblock %}
+
+{% block content %}
+    <div class="container_productDeteil" style="margin-bottom: 150px;">
+        <form method="post">
+              {% csrf_token %}
+              <button class="more-link" style="padding: 15px 50px; margin-bottom: 10px;">Yes</button>
+              <a href="{% url 'productDetail' pk=property.pk %}" style="display: block"> < back</a>
+          </form>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

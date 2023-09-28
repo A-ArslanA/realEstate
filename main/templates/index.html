@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+
+{% block links %}
+    <link rel="shortcut icon" href="{% static '/img/logo.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="{% static '/js/lang.js' %}"></script>
+    <style>
+        label {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+
+{% block title %} Home Page {% endblock %}
+
+{% block linkActive %}
+    <a href="{% url 'rent' %}" class="links">Rent</a>
+    <a href="{% url 'buy' %}" class="links">Buy</a>
+    <a href="{% url 'sell' %}" class="links">Sell</a>
+    <a href="{% url 'favorite' %}" class="links">Favorite</a>
+    <button class="header__btn translate" id="ru">Ru</button>
+    <button class="header__btn translate" id="en">En</button>
+    <button class="header__btn translate" id="kz">Kz</button>
+{% endblock %}
+
+{% block content %}
+    <div class="slide_1">
+        <div class="slide_1_grid_1">
+            <h1 class="lang" key="title">Buy, rent or sell your properity <br> easly</h1>
+            <p class="lang" key="description">A great platform to buy, sell, or rent your properties <br> without any commisions.</p>
+            <div class="renters_and_properties">
+                <div class="renters">
+                    <div class="renter_1">
+                        <div class="create-line"></div>
+                        <h2>50k+</h2>
+                        <p class="lang" key="renters">renters</p>
+                    </div>
+                    <div class="renter_2">
+                        <div class="create-line"></div>
+                        <h2>10k+</h2>
+                        <p>properties</p>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="first_btn">Rent</button>
+                <button>Buy</button>
+                <button class="last_btn">Sell</button>
+              </div>
+        </div>
+        <div class="slide_1_grid_2">
+            <a href="#" class="gradient"><img src="{% static '/img/how-to-design-a-house.jpg' %}" alt=""></a>
+            {% for latest in latest_property %}
+            <a style="text-decoration: none" href="{% url 'productDetail' latest.id %}">
+                <div class="card">
+                <div class="cardUp">
+                    <img src="{{ latest.photo }}" alt="pic">
+                    <!--img/w800x533.jpg-->
+                </div>
+                <div class="cardDown">
+                    <div class="price" style="margin-top: -13px;">
+                        <h2>{{latest.price}}&#8376; </h2><p>/month/all</p>
+                    </div>
+                    <div class="infoCard" style="margin-top: -5px;">
+                        <h1>{{latest.name}}</h1>
+                        <p>{{latest.address}}</p>
+                    </div>
+                    <div class="infoHouse">
+                        <img src="{% static '/img/bed_bed_room_sleep_furniture_icon_124423.svg' %}" alt="">
+                        <img src="{% static '/img/bath_icon_144509.svg' %}" alt="">
+                        <img src="{% static '/img/rectangle_85962.svg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="slide_2">
+        <div class="head_slide_2">
+            <h1 class="lang" key="offers">Our Offers</h1>
+            <a href="#">More properties ></a>
+        </div>
+        <section class="layout">
+            {% for el in data %}
+            <div class="cardLayout">
+                <div class="cardUpLayout">
+                    <img src="{{ el.photo }}" alt="pic">
+                </div>
+                <div class="cardDownLayout">
+                    <div class="price">
+                        <h2>{{el.price}}&#8376; </h2><p>/month/all</p> <a href=""><i class="fa-solid fa-cart-shopping" style="margin-left: 5px;"></i></a>
+                    </div>
+                    <div class="infoCardLayout">
+                        <h1>{{el.name}}</h1>
+                        <p>{{el.address}}</p>
+                    </div>
+                    <div class="infoHouseLayout">
+                        <a class="more-link" href="{% url 'productDetail' el.id %}">More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+    </div>
+    <div class="slide_3">
+        <div class="lol">
+            <h1 class="lang" key="testimonials">Testimonials</h1>
+            <p>See what are property managers, landlords, and tenants have to say</p>
+        </div>
+        <div class="container">
+            <div class="slideshow_wrapper">
+                <div class="slideshow">
+                    {% for el in reviews %}
+                    <div class="slide_one slide">
+                        <div class="slide_img">
+                            <img src="{% static '/img/png-transparent-user-profile-computer-icons-profile-heroes-black-silhouette-thumbnail.png' %}" alt="">
+                        </div>
+                        <h3>{{ el.user }}</h3>
+                        <p>{{ el.text }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="add-btn">Add</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+    <div class="slide_4">
+        <h2>No Spam Promise</h2>
+        <h1>Do you need help?</h1>
+        <p>Contact Support. do not be shy</p>
+        <form method="post" class="faq-form">
+            {% csrf_token %}
+            {{ form1.as_p }}
+            {% if user.is_authenticated %}
+            <button type="submit" class="add-btn mr">Send</button>
+            {% endif %}
+        </form>
+
+        {% if user.is_superuser %}
+        <a href="{% url 'faq' %}" style="margin-top: 10px; text     -decoration: underline; color: white;">FAQ</a>
+        {% endif %}
+        {% if not user.is_authenticated %}
+        <span style="color: white">Please Log In</span>
+        {% endif %}
+    </div>
+{% endblock %}

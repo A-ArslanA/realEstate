@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block links %}
+    <link rel="shortcut icon" href="{% static '/img/logo.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/css/productDetailcss.css' %}">
+{% endblock %}
+
+{% block title %} {{ property.name }} {% endblock %}
+
+{% block linkActive %}
+    <a href="{% url 'rent' %}" class="links">Rent</a>
+    <a href="{% url 'buy' %}" class="links">Buy</a>
+    <a href="{% url 'sell' %}" class="links">Sell</a>
+    <a href="{% url 'favorite' %}" class="links">Favorite</a>
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="container_productDeteil">
+        <nav>
+            <a href="{% url 'index' %}"> < Back to map</a>
+            <div class="opisanie">
+                <h1>{{ property.name }}</h1>
+                {% if not is_favorite %}
+                <a href="{% url 'add_to_favorites' pk=property.pk %}">Favorite</a>
+                {% else %}
+                <a href="{% url 'favorite' %}">See Favorites</a>
+                {% endif %}
+            </div>
+            <p>{{ property.address }}</p>
+        </nav>
+        <div class="img-container">
+            <main>
+                <img src="{{ property.photo }}" alt="">
+            </main>
+            <aside>
+                <img src="{% static '/img/how-to-design-a-house.jpg' %}" alt="">
+                <img src="{% static '/img/how-to-design-a-house.jpg' %}" alt="">
+            </aside>
+        </div>
+        <div class="info-container">
+            <main>
+                <div class="info">
+                    <div class="into-info">
+                        <p>Bedrooms</p>
+                        <h3>{{ property.bedrooms }}</h3>
+                    </div>
+                    <div class="into-info">
+                        <p>Bathrooms</p>
+                        <h3>{{ property.bathrooms }}</h3>
+                    </div>
+                    <div class="into-info">
+                        <p>Square Area</p>
+                        <h3>{{ property.squareArea }}</h3>
+                    </div>
+                    <div class="into-info">
+                        <p>Repair Quality</p>
+                        <h3>{{ property.repairQuality }}</h3>
+                    </div>
+                    <div class="into-info">
+                        <p>Status</p>
+                        {% if property.status %}
+                        <h3>Active</h3>
+                        {% else %}
+                        <h3>Pass</h3>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="about">
+                    <h2>About this home</h2>
+                    <p>{{ property.description }}</p>
+                </div>
+                <div class="rent-history">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date To</th>
+                                <th>Price</th>
+                                <th>Date Out</th>
+                            </tr>
+                            <thead>
+                                <tbody>
+                                    <tr>
+                                        <td>X</td>
+                                        <td>{{ property.price }}</td>
+                                        <td>X</td>
+                                    </tr>
+                                    <tr>
+                                        <td>X</td>
+                                        <td>{{ property.price }}</td>
+                                        <td>X</td>
+                                    </tr>
+                                </tbody>
+                    </table>
+                </div>
+            </main>
+            <aside>
+                <div class="card-oplata">
+                    <div class="popa">
+                        <p>Rent price</p>
+                        <div class="price">
+                            <h2 style="color: #6e73ca;">{{ property.price }}&#8376; </h2><p>/mounth/all</p>
+                        </div>
+                        <button type="submit">Apply Now</button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <div class="model">
+
+        </div>
+        <div style="display: flex;">
+            <a class="more-link" href="{% url 'editProperty' pk=property.pk %}">Edit Post</a>
+            {% if user == property.owner %}
+            <a class="more-link" href="{% url 'deleteProperty' pk=property.pk %}">Delete Post</a>
+            {% endif %}
+        </div>
+    </div>
+{% else %}
+    <div class="container_productDeteil" style="margin-bottom: 150px;">
+        <nav>
+            <a href="{% url 'index' %}" style="color: red; font-size: 28px;"> < Please Log In</a>
+        </nav>
+    </div>
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

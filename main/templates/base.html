@@ -1,0 +1,116 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block links %}
+
+    {% endblock %}
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <div class="header_container">
+        <header>
+            <div class="header_logo">
+                <img src="{% static '/img/logo.svg' %}" alt="logo" height="30px">
+                <h3><a href="{% url 'index' %}" style="text-decoration: none; color: #000;">Estatery</a></h3>
+            </div>
+            <div class="header_links">
+                {% block linkActive %}
+
+                {% endblock %}
+            </div>
+            {% if not user.is_authenticated %}
+                <div class="header_auth">
+                    <a href="{% url 'authPage' %}" class="login"><h3>login</h3></a>
+                    <a href="{% url 'authPage' %}" class="signup"><h3>Sign Up</h3></a>
+                </div>
+            {% else %}
+                <div class="header_auth">
+                    <span style="margin-top: 13px;">{{ user }}</span>
+                    <a href="{% url 'addProperty' %}" class="signup" style="margin-right: 10px;"><h3>addProperty</h3></a>
+                    <a href="{% url 'logout' %}" class="login"><h3>Log Out</h3></a>
+                </div>
+            {% endif %}
+        </header>
+    </div>
+    {% block content %}
+
+    {% endblock %}
+    <footer>
+        <div class="container_footer">
+            <div class="big__footer">
+                <div class="footer__1">
+                    <div class="footer__logo">
+                        <img src="{% static '/img/logo.svg' %}" alt="logo" height="50px">
+                        <h1>Estatery</h1>
+                    </div>
+                    <div class="big__footer__content">
+                        Gesent vel rutrum purus Nam vel dui eu risus <br> duis dignissim dignissim Suspen disse at eros <br> tempus
+                    </div>
+                    <div class="media__logos">
+                        <a href="#" class="facebook">
+                            <img src="{% static '/img/facebook.jpg' %}" alt="">
+                        </a>
+                        <a href="#" class="instagram">
+                            <img src="{% static '/img/Instagram.jpg' %}" alt="">
+                        </a>
+                        <a href="#" class="twitter">
+                            <img src="{% static '/img/twitter.jpg' %}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="footer__2">
+                    <div class="our__classes">
+                        <div class="our__classes__title">
+                            <h1>Our Classes</h1>
+                        </div>
+                        <a href="#">Fitness Classes</a>
+                        <a href="#">Aerobics Classes</a>
+                        <a href="#">Power Yoga</a>
+                        <a href="#">Lean Machines</a>
+                        <a href="#">Full-Body Strength</a>
+                    </div>
+                </div>
+                <div class="footer__3">
+                    <div class="quick__links">
+                        <div class="quick__links__title">
+                            <h1>Quick Links</h1>
+                        </div>
+                        <a href="#">FitnesClassess </a>
+                        <a href="#">Aerobics Classes</a>
+                        <a href="#">Power Yoga</a>
+                        <a href="#">Lean Machines</a>
+                        <a href="#">Full-Body Strength</a>
+                    </div>
+                </div>
+                <div class="footer__4">
+                    <div class="gymat__location">
+                        <div class="gymat__location__title">
+                            <h1>Estatery Location</h1>
+                        </div>
+                        <div class="gymat__location__content">
+                            178 West 27th Street, Suite 527, <br> New York NY 10012 United States
+                        </div>
+                        <div class="gymat__location__tel">
+                            <img src="{% static '/img/PhoneNumber.jpg' %}" alt="tel">
+                        </div>
+                        <div class="gymat__location__email">
+                            <a href="#">estatery@yourname.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container__footer">
+            <div class="footer__content">
+                <h1>
+                    Copyright © 2020 Itawa. All rights reserved.
+                </h1>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

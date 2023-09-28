@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block links %}
+    <link rel="shortcut icon" href="{% static '/img/logo.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+{% endblock %}
+
+{% block title %} Buy {% endblock %}
+
+{% block linkActive %}
+    <a href="{% url 'rent' %}" class="links">Rent</a>
+    <a href="{% url 'buy' %}" class="link_active">Buy</a>
+    <a href="{% url 'sell' %}" class="links">Sell</a>
+    <a href="{% url 'favorite' %}" class="links">Favorite</a>
+{% endblock %}
+
+{% block content %}
+    <nav>
+        <h1>Search properties to buy</h1>
+    </nav>
+    <div class="cardSlide">
+        <section class="layout rentCard">
+            {% for el in properties %}
+            {% if el.isBuy %}
+            <div class="cardLayout">
+                <div class="cardUpLayout">
+                    <img src="{{ el.photo }}" alt="">
+                </div>
+                <div class="cardDownLayout">
+                    <div class="price">
+                        <h2>{{ el.price }}&#8376; </h2><p>/month/all</p> <a href=""><i class="fa-solid fa-cart-shopping" style="margin-left: 60px;"></i></a>
+                    </div>
+                    <div class="infoCardLayout">
+                        <h1>{{ el.name }}</h1>
+                        <p>{{ el.address }}</p>
+                    </div>
+                    <div class="infoHouseLayout">
+                        <a class="more-link" href="{% url 'productDetail' el.id %}">More</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </section>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

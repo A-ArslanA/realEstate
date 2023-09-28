@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block links %}
+    <link rel="shortcut icon" href="{% static '/img/logo.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/css/productDetailcss.css' %}">
+{% endblock %}
+
+{% block title %} not Owner {% endblock %}
+
+{% block linkActive %}
+    <a href="{% url 'rent' %}" class="links">Rent</a>
+    <a href="{% url 'buy' %}" class="links">Buy</a>
+    <a href="{% url 'sell' %}" class="links">Sell</a>
+    <a href="{% url 'favorite' %}" class="links">Favorite</a>
+{% endblock %}
+
+{% block content %}
+    <div class="container_productDeteil" style="margin-bottom: 150px;">
+        <nav>
+            <h1 style="font-size: 24px">You are not Owner</h1>
+            <a href="{% url 'productDetail' pk=property.pk %}"> < Back</a>
+        </nav>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
